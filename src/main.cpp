@@ -27,8 +27,8 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
-  uint64_t timePerFrame = 1000000 / 25;
-  uint64_t time = vex::timer::system();
+  uint64_t timeMicrosPerFrame = 1000000 / 25;
+  uint64_t timeMicros = vex::timer::system();
 
   uint32_t frameNum = 0;
   while (true) {
@@ -62,12 +62,12 @@ int main() {
 
     free(image);
 
-    time += timePerFrame;
-    int64_t sleepForMs =
-        ((int64_t)time - (int64_t)vex::timer::systemHighResolution()) / 1000;
+    timeMicros += timeMicrosPerFrame;
+    int64_t sleepMillis =
+        ((int64_t)timeMicros - (int64_t)vex::timer::systemHighResolution()) / 1000;
     // printf("Sleeping for: %lu ms\n", sleepFor);
-    if (sleepForMs > 0) {
-      vex::task::sleep(sleepForMs);
+    if (sleepMillis > 0) {
+      vex::task::sleep(sleepMillis);
     }
   }
 }
